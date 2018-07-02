@@ -1,0 +1,763 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
+<HTML>
+<HEAD><TITLE>
+Hercules Version 3: Hercules Specific Diagnose Codes</TITLE>
+<LINK REL=STYLESHEET TYPE="text/css" HREF="hercules.css">
+</HEAD>
+<BODY BGCOLOR="#ffffcc" TEXT="#000000" LINK="#0000A0"
+      VLINK="#008040" ALINK="#000000">
+<h1>Hercules Version 3: Hercules Specific Diagnose Codes</h1>
+<p>
+This page describes miscellaneous diagnose functions for the Hercules S/370,
+ESA/390, and z/Architecture emulator.
+<h3>Codes</h3>
+<dl class="messages">
+
+<!-- ----------------------------------------------------------- -->
+<!-- ------    INDEX    ---------------------------------------- -->
+<!-- ----------------------------------------------------------- -->
+
+<blockquote><table>
+<tr><td><a href="002"><tt>
+Diagnose 002: Update Interrupt Interlock Control Bit in PMCW
+</tt></a></td></tr>
+<tr><td><a href="01F"><tt>
+Diagnose 01F: Power Off
+</tt></a></td></tr>
+<tr><td><a href="044"><tt>
+Diagnose 044: Voluntary Time Slice End
+</tt></a></td></tr>
+<tr><td><a href="080"><tt>
+Diagnose 080: MSSF Call
+</tt></a></td></tr>
+<tr><td><a href="09C"><tt>
+Diagnose 09C: Voluntary Time Slice End With Target CPU
+</tt></a></td></tr>
+<tr><td><a href="204"><tt>
+Diagnose 204: LPAR RMF Interface
+</tt></a></td></tr>
+<tr><td><a href="224"><tt>
+Diagnose 224: CPU Names
+</tt></a></td></tr>
+<tr><td><a href="21C"><tt>
+Diagnose 21C: ????
+</tt></a></td></tr>
+<tr><td><a href="288"><tt>
+Diagnose 288: Control Virtual Machine Time Bomb
+</tt></a></td></tr>
+<tr><td><a href="000"><tt>
+Diagnose 000: Store Extended Identification Code
+</tt></a></td></tr>
+<tr><td><a href="008"><tt>
+Diagnose 008: Virtual Console Function
+</tt></a></td></tr>
+<tr><td><a href="00C"><tt>
+Diagnose 00C: Pseudo Timer
+</tt></a></td></tr>
+<tr><td><a href="024"><tt>
+Diagnose 024: Device Type and Features
+</tt></a></td></tr>
+<tr><td><a href="05C"><tt>
+Diagnose 05C: Error Message Editing
+</tt></a></td></tr>
+<tr><td><a href="060"><tt>
+Diagnose 060: Virtual Machine Storage Size
+</tt></a></td></tr>
+<tr><td><a href="064"><tt>
+Diagnose 064: Named Saved Segment Manipulation
+</tt></a></td></tr>
+<tr><td><a href="0A4"><tt>
+Diagnose 0A4: Synchronous I/O (Standard CMS Blocksize)
+</tt></a></td></tr>
+<tr><td><a href="0A8"><tt>
+Diagnose 0A8: Synchronous General I/O
+</tt></a></td></tr>
+<tr><td><a href="0B0"><tt>
+Diagnose 0B0: Access Re-IPL Data
+</tt></a></td></tr>
+<tr><td><a href="0DC"><tt>
+Diagnose 0DC: Control Application Monitor Record Collection
+</tt></a></td></tr>
+<tr><td><a href="210"><tt>
+Diagnose 210: Retrieve Device Information
+</tt></a></td></tr>
+<tr><td><a href="214"><tt>
+Diagnose 214: Pending Page Release
+</tt></a></td></tr>
+<tr><td><a href="220"><tt>
+Diagnose 220: TOD Epoch
+</tt></a></td></tr>
+<tr><td><a href="23C"><tt>
+Diagnose 23C: Address Space Services
+</tt></a></td></tr>
+<tr><td><a href="250"><tt>
+Diagnose 250: Standardized Block I/O
+</tt></a></td></tr>
+<tr><td><a href="260"><tt>
+Diagnose 260: Access Certain Virtual Machine Information
+</tt></a></td></tr>
+<tr><td><a href="264"><tt>
+Diagnose 264: CP Communication
+</tt></a></td></tr>
+<tr><td><a href="270"><tt>
+Diagnose 270: Pseudo Timer Extended
+</tt></a></td></tr>
+<tr><td><a href="274"><tt>
+Diagnose 274: Set Timezone Interrupt Flag
+</tt></a></td></tr>
+<tr><td><a href="308"><tt>
+Diagnose 308: IPL functions
+</tt></a></td></tr>
+<tr><td><a href="F00"><tt>
+Diagnose F00: Hercules normal mode
+</tt></a></td></tr>
+<tr><td><a href="F04"><tt>
+Diagnose F04: Hercules single step mode
+</tt></a></td></tr>
+<tr><td><a href="F08"><tt>
+Diagnose F08: Hercules get instruction counter
+</tt></a></td></tr>
+<tr><td><a href="F0C"><tt>
+Diagnose F0C: Set/reset bad frame indicator
+</tt></a></td></tr>
+<tr><td><a href="F10"><tt>
+Diagnose F10: Hercules CPU stop
+</tt></a></td></tr>
+<tr><td><a href="F18"><tt>
+Diagnose F18: Hercules Access Host Resource
+</tt></a></td></tr>
+<tr><td><a href="FE8"><tt>
+Diagnose FE8: Simulate Illegal Instruction
+</tt></a></td></tr>
+<tr><td><a href="FEC"><tt>
+Diagnose FEC: Simulate Floating Point Exception
+</tt></a></td></tr>
+<tr><td><a href="FF0"><tt>
+Diagnose FF0: Simulate Segment Violation
+</tt></a></td></tr>
+<tr><td><a href="FF4"><tt>
+Diagnose FF4: Simulate BUS Error
+</tt></a></td></tr>
+<tr><td><a href="FF8"><tt>
+Diagnose FF8: Simulate Loop
+</tt></a></td></tr>
+<tr><td><a href="FFC"><tt>
+Diagnose FFC: Simulate Wait
+</tt></a></td></tr>
+<tr><td><a href="xxx"><tt>
+Diagnose xxx: Invalid function code
+</tt></a></td></tr>
+
+</table></blockquote>
+
+<p><hr><p>
+<!-- ----------------------------------------------------------- -->
+<!-- ------    Message detail   -------------------------------- -->
+<!-- ----------------------------------------------------------- -->
+
+<dt><tt><a name="002"><b>
+Diagnose 002: Update Interrupt Interlock Control Bit in PMCW
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="01F"><b>
+Diagnose 01F: Power Off
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="044"><b>
+Diagnose 044: Voluntary Time Slice End
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="080"><b>
+Diagnose 080: MSSF Call
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="09C"><b>
+Diagnose 09C: Voluntary Time Slice End With Target CPU
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="204"><b>
+Diagnose 204: LPAR RMF Interface
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="224"><b>
+Diagnose 224: CPU Names
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="21C"><b>
+Diagnose 21C: ????
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="288"><b>
+Diagnose 288: Control Virtual Machine Time Bomb
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="000"><b>
+Diagnose 000: Store Extended Identification Code
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="008"><b>
+Diagnose 008: Virtual Console Function
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="00C"><b>
+Diagnose 00C: Pseudo Timer
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="024"><b>
+Diagnose 024: Device Type and Features
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="05C"><b>
+Diagnose 05C: Error Message Editing
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="060"><b>
+Diagnose 060: Virtual Machine Storage Size
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="064"><b>
+Diagnose 064: Named Saved Segment Manipulation
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="0A4"><b>
+Diagnose 0A4: Synchronous I/O (Standard CMS Blocksize)
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="0A8"><b>
+Diagnose 0A8: Synchronous General I/O
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="0B0"><b>
+Diagnose 0B0: Access Re-IPL Data
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="0DC"><b>
+Diagnose 0DC: Control Application Monitor Record Collection
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="210"><b>
+Diagnose 210: Retrieve Device Information
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="214"><b>
+Diagnose 214: Pending Page Release
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="220"><b>
+Diagnose 220: TOD Epoch
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="23C"><b>
+Diagnose 23C: Address Space Services
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="250"><b>
+Diagnose 250: Standardized Block I/O
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="260"><b>
+Diagnose 260: Access Certain Virtual Machine Information
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="264"><b>
+Diagnose 264: CP Communication
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="270"><b>
+Diagnose 270: Pseudo Timer Extended
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="274"><b>
+Diagnose 274: Set Timezone Interrupt Flag
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="308"><b>
+Diagnose 308: IPL functions
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="F00"><b>
+Diagnose F00: Hercules normal mode
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="F04"><b>
+Diagnose F04: Hercules single step mode
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="F08"><b>
+Diagnose F08: Hercules get instruction counter
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="F0C"><b>
+Diagnose F0C: Set/reset bad frame indicator
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="F10"><b>
+Diagnose F10: Hercules CPU stop
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="F18"><b>
+Diagnose F18: Hercules Access Host Resource
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="FE8"><b>
+Diagnose FE8: Simulate Illegal Instruction
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="FEC"><b>
+Diagnose FEC: Simulate Floating Point Exception
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="FF0"><b>
+Diagnose FF0: Simulate Segment Violation
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="FF4"><b>
+Diagnose FF4: Simulate BUS Error
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="FF8"><b>
+Diagnose FF8: Simulate Loop
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="FFC"><b>
+Diagnose FFC: Simulate Wait
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+<dt><tt><a name="xxx"><b>
+Diagnose xxx: Invalid function code
+</b></a></tt><dd><dl>
+
+<p><dt>Call<dd>
+
+lorem ipsem
+
+<p><dt>Registers Used<dd>
+
+lorem ipsem
+
+<p></dl><br>
+
+<!-- ----------------------------------------------------------- -->
+
+</dl>
+<p><center><hr width=15% noshade></center>
+<p>
+If you have a question about Hercules, see the
+<a href="hercfaq.html">Hercules Frequently-Asked Questions</a> page.
+
+<p><center><hr width=15% noshade>
+<a href="hercmsg.html"><img src="images/back.gif" border=0 alt="back"></a>
+</center>
+<p class="lastupd">Last updated $Date$ $Revision$</p>
+</BODY>
+</HTML>
+/* DIAGNOSE.C   (C) Copyright Roger Bowler, 2000-2012                */
+/*              ESA/390 Diagnose Functions                           */
+/*                                                                   */
+/*   Released under "The Q Public License Version 1"                 */
+/*   (http://www.hercules-390.org/herclic.html) as modifications to  */
+/*   Hercules.                                                       */
+
+/* z/Architecture support - (C) Copyright Jan Jaeger, 1999-2012      */
+
+/*-------------------------------------------------------------------*/
+/* This module implements miscellaneous diagnose functions           */
+/*-------------------------------------------------------------------*/
+
+/*-------------------------------------------------------------------*/
+/* Additional credits:                                               */
+/*      Hercules-specific diagnose calls by Jay Maynard.             */
+/*      Set/reset bad frame indicator call by Jan Jaeger.            */
+/*-------------------------------------------------------------------*/
+
+1:/* DIAGNOSE.C   (C) Copyright Roger Bowler, 2000-2012                */
+2:/*              ESA/390 Diagnose Functions                           */
+11:/* This module implements miscellaneous diagnose functions           */
+16:/*      Hercules-specific diagnose calls by Jay Maynard.             */
+
+36:/* Diagnose 308 function subcodes */
+37:#define DIAG308_IPL_CLEAR       3       /* IPL clear                 */
+38:#define DIAG308_IPL_NORMAL      4       /* IPL normal/dump           */
+39:#define DIAG308_SET_PARAM       5       /* Set IPL parameters        */
+40:#define DIAG308_STORE_PARAM     6       /* Store IPL parameters      */
+42:/* Diagnose 308 return codes */
+43:#define DIAG308_RC_OK           1
+51:/* Within diagnose 0x308 (re-ipl) a thread is started with the next code.    */
